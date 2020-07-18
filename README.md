@@ -1,2 +1,2 @@
-# GOP-
+# GOP
 GameOfPixels
