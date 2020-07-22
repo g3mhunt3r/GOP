@@ -6,13 +6,20 @@
 int countn(char grid[X][Y], int i, int j)
 {
 	int c;
-	c=grid[(i-1)%X][(j-1)%Y]+grid[i][(j-1)%Y]+grid[(i+1)%X][(j-1)%Y]+grid[(i-1)%X][j]+grid[(i+1)%X][j]+grid[(i-1)%X][(j+1)%Y]+grid[i][(j+1)%Y]+grid[(i+1)%X][(j+1)%Y];
+	c=grid[(i-1+X)%X][(j-1+Y)%Y]+				// top left
+	grid[i][(j-1+Y)%Y]+							// top
+	grid[(i+1)%X][(j-1+Y)%Y]+					// top right
+	grid[(i-1+X)%X][j]+							// left
+	grid[(i+1)%X][j]+							// right
+	grid[(i-1+X)%X][(j+1)%Y]+					// bottom left
+	grid[i][(j+1)%Y]+							// bottom
+	grid[(i+1)%X][(j+1)%Y];						// bottom right
 	return c;
 }
 
 void updateg(char grid[X][Y])
 {
-	char copyg[X][Y];
+	char copyg[X][Y]; 
 	int c;
 	for(int i=0;i<X;i++)
 	{   
@@ -25,7 +32,7 @@ void updateg(char grid[X][Y])
 	{   
 		for(int j=0;j<Y;j++)
 		{	
-			countn(copyg, i, j);
+			c=countn(copyg, i, j);
 			if(c==3)
 				grid[i][j]=1;
 			else if(c>3||c<2)
